@@ -5,7 +5,7 @@ function Task() {
     return (
         <React.Fragment>
             <div className="title-text">
-                123
+                Task page
             </div>
         </React.Fragment>
     )
