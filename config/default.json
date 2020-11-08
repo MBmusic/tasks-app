@@ -1,0 +1,4 @@
+{
+    "port": 3020,
+    "mongoUrl": "mongodb+srv://Dima:Mypass123@cluster0.abssz.azure.mongodb.net/app?retryWrites=true&w=majority"
+}
