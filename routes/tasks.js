@@ -12,6 +12,18 @@ router.get("/", async (req, res) => {
     }
 });
 
+//Get task
+router.get("/task/:id", async (req, res) => {
+    try {
+        const task = await Task.findOne({
+            _id: req.params.id
+        });
+        res.json(task);
+    } catch (e) {
+        res.status(500).json({ message: "Error 500" })
+    }
+});
+
 // Submit task
 router.post("/", async (req, res) => {
     try {

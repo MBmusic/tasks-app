@@ -33,12 +33,20 @@ nav i.settings-icon {
     @include flex(row, space-between, center);
 }
 
+.flex--row_between-start {
+    @include flex(row, space-between, flex-start);
+}
+
 .flex--row_end-center {
     @include flex(row, flex-end, center);
 }
 
 .flex--row_start-center {
     @include flex(row, flex-start, center);
+}
+
+.flex--row_start-start {
+    @include flex(row, flex-start, flex-start);
 }
 
 .flex--column_start-start {
@@ -222,6 +230,10 @@ nav i.settings-icon {
     margin-bottom: 30px;
 }
 
+.margin--bottom_40 {
+    margin-bottom: 40px;
+}
+
 .margin--left_20 {
     margin-left: 20px;
 }
@@ -246,6 +258,54 @@ nav i.settings-icon {
         opacity: 1;
         transform: translateY(0px);
     }
+}
+
+.message {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+
+    .message__main {
+        width: calc(100% - 120px);
+
+        .message__avatar {
+            @include sizes(70px, 70px);
+            border-radius: 10px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .message__post {
+            margin-left: 20px;
+            
+            .message__author {
+                font-size: 16px;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+
+            .message__text {
+                font-size: 14px;
+                color: rgb(109, 109, 109);
+            }
+        }
+    }
+
+    .message__date {
+        font-size: 12px;
+        color: rgba(156, 156, 156, 0.88);
+    }
+}
+
+.form-message {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+    padding: 15px 40px 40px;
+    border: solid 2px #e4e4e4;
 }
 
 @each $theme, $color in $color-themes {
@@ -309,6 +369,8 @@ nav i.settings-icon {
             color: $color;
         }
     }
+
+    
 }
 
 @media only screen and (max-width: 992px) {
