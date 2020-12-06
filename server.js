@@ -8,11 +8,13 @@ app.use(cors());
 
 // Import routes
 const tasksRoutes = require("./routes/tasks"); 
+const messagesRoutes = require("./routes/messages"); 
 
 const PORT = config.get("port") || 3020;
 
 app.use(bodyParser.json());
 app.use("/tasks", tasksRoutes);
+app.use("/messages", messagesRoutes);
 
 async function startApp() {
     try {

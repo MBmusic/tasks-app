@@ -13,6 +13,11 @@ export const allTextLang = {
 
     "all_text_empty_data": ["Нет данных", "Немає даних", "No data"],
 
+    // Task page
+    "all_text_task_message_author": ["Автор", "Автор", "Author"],
+    "all_text_task_message_message": ["Сообщение", "Коментар", "Message"],
+    "all_text_task_message_btn": ["Добавить комментарий", "Додати коментар", "Add comment"],
+    
     // Info page
     "all_text_about_title": ["Инфо", "Інфо", "Info"],
     "all_text_about_text": ["Мой", "Мій", "My"],
