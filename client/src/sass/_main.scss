@@ -53,6 +53,10 @@ nav i.settings-icon {
     @include flex(column, flex-start, flex-start);
 }
 
+.flex--column_between-end {
+    @include flex(column, space-between, flex-end);
+}
+
 .title-text {
     font-size: 28px;
     padding: 0 10px;
@@ -298,6 +302,7 @@ nav i.settings-icon {
     .message__date {
         font-size: 12px;
         color: rgba(156, 156, 156, 0.88);
+        align-self: stretch;
     }
 }
 

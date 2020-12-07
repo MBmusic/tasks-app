@@ -19,8 +19,12 @@ function RenderMessage(props) {
                 </div>
             </div>
 
-            <div className="message__date">
-                2020 year
+            <div className="message__date flex--column_between-end">
+                <div>2020 year</div>
+
+                <span onClick = {() => props.deleteMessage(props.item._id)} className="btn-floating waves-effect waves-light">
+                    <i className="material-icons">delete</i>
+                </span>
             </div>
         </div>
     )

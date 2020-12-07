@@ -3,9 +3,11 @@ const router = express.Router();
 const Message = require("../models/Message");
 
 // Get all messages
-router.get("/", async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
-        const tasks = await Message.find();
+        const tasks = await Message.find({
+            id_post: req.params.id
+        });
         res.json(tasks);
     } catch (e) {
         res.status(500).json({ message: "Error 500" })

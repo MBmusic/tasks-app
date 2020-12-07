@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { Translate } from "react-localize-redux";
-import { map } from "lodash";
+import { isEmpty, map } from "lodash";
 import LangService from "../../services/LangService";
 import Loader from "../../customComponents/Loader";
 import API from "../../RequestApi";
@@ -35,7 +35,7 @@ function Task(props) {
     }
 
     const getAllMessages = async () => {
-        const responce = await API.get("/messages");       
+        const responce = await API.get(`/messages/${id}`);       
         setPosts(responce.data);
         setLoadPosts(true);
     };
@@ -67,6 +67,15 @@ function Task(props) {
         });
     }
 
+    const deleteMessage = (deleteId) => {
+        API.delete(`/messages/${deleteId}`).then(() => {
+            const messagesList = posts.filter(item => item._id !== deleteId);
+            setPosts(messagesList);
+        });
+        
+        setPopupDeleteToggle(false);
+    };
+
     const messagesReverse = () => {
         return [...posts].reverse();
     }
@@ -85,6 +94,7 @@ function Task(props) {
                         <RenderMessage 
                             key = {i}
                             item = {item}
+                            deleteMessage = {deleteMessage}
                         />
                     )
                 })
@@ -122,7 +132,7 @@ function Task(props) {
                                         value = {post.author}
                                         onChange = {(event) => handleChangeField(event, "author")}
                                     />
-                                    <label htmlFor="author">{translate(`${allTextLang}_task_message_author`)}</label>
+                                    <label htmlFor="author" className = {isEmpty(post.author) ? "" : "active"}>{translate(`${allTextLang}_task_message_author`)}</label>
                                     <span className="input-field__length">{post.author.length}/{maxSizeAutor}</span>
                                 </div>
                             </div>
@@ -135,7 +145,7 @@ function Task(props) {
                                         value = {post.message}
                                         onChange = {(event) => handleChangeField(event, "message")}
                                     />
-                                    <label htmlFor="message">{translate(`${allTextLang}_task_message_message`)}</label>
+                                    <label htmlFor="message" className = {isEmpty(post.message) ? "" : "active"}>{translate(`${allTextLang}_task_message_message`)}</label>
                                     <span className="input-field__length">{post.message.length}/{maxSizeMessage}</span>
                                 </div>
                             </div>

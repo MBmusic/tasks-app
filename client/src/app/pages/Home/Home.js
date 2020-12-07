@@ -160,7 +160,7 @@ function Home() {
                                             value = {title}
                                             onChange = {(event) => handleChangeField(event)}
                                         />
-                                        <label htmlFor="title">{translate(`${allTextLang}_home_input`)}</label>
+                                        <label htmlFor="title" className = {isEmpty(title) ? "" : "active"}>{translate(`${allTextLang}_home_input`)}</label>
                                         <span className="input-field__length">{title.length}/{maxSize}</span>
                                     </div>
                                 </div>
