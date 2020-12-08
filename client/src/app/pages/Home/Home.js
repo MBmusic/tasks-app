@@ -13,6 +13,7 @@ import PopupUpdateTask from "./components/PopupUpdateTask";
 function Home() {
     const [title, setTitle] = useState(""); 
     const [tasks, setTasks] = useState("");
+    const [messages, setMessages] = useState([]);
     const [loadData, setLoadData] = useState(false);
     const [errorField, setErrorField] = useState(false);
 
@@ -34,12 +35,18 @@ function Home() {
 
     useEffect(() => {
         getAllTasks(); 
+        getAllMessages();
     }, []);
 
     const getAllTasks = async () => {
         const responce = await API.get("/tasks");       
         setTasks(responce.data);
         setLoadData(true);
+    };
+
+    const getAllMessages = async () => {
+        const responce = await API.get("/messages");       
+        setMessages(responce.data);
     };
 
     const addTask = (event) => {
@@ -69,6 +76,8 @@ function Home() {
     const deleteTask = () => {
         API.delete(`/tasks/${deleteId}`).then(() => {
             const tasksList = tasks.filter(item => item._id !== deleteId);
+            API.delete(`/messages/post/${deleteId}`);
+            
             setTasks(tasksList);
         });
         
@@ -90,21 +99,29 @@ function Home() {
     }
 
     const renderTasks = (translate) => {
+        const allTextLang = LangService.key().allText; 
+        let resultForEverPost = null;
+
         if (!tasks.length) {
             return (
                 <li className="text--center">
-                    {translate}
+                    {translate(`${allTextLang}_empty_data`)}
                 </li>
             )
         } else {
             return (
                 map(tasksReverse(), (item, i) => {
+                    resultForEverPost = messages.filter(mess => mess.id_post === item._id);
+
                     return (
                         <RenderTask 
                             key = {i}
                             item = {item}
                             toggleUpdate = {toggleUpdate}
                             toggleDelete = {toggleDelete}
+                            resultForEverPost = {resultForEverPost}
+                            translate = {translate}
+                            allTextLang = {allTextLang}
                         />
                     )
                 })
@@ -174,7 +191,7 @@ function Home() {
                                 load = {loadData}
                             >
                                 <ul className="collection">
-                                    {renderTasks(translate(`${allTextLang}_empty_data`))}
+                                    {renderTasks(translate)}
                                 </ul>
                             </Loader>
                         </div>
