@@ -22,7 +22,6 @@ function App() {
     DataStorage.init();
     ThemeService.init(store);
     LangService.init(store);
-    alert(1);
 
     return (
         <React.Fragment>
