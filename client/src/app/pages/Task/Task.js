@@ -25,7 +25,7 @@ function Task(props) {
 
     useEffect(() => {
         getTask(); 
-        getAllMessagesByPostId();
+        getAllMessages();
     }, []);
 
     const getTask = async () => {
@@ -34,7 +34,7 @@ function Task(props) {
         setLoadTaskName(true);
     }
 
-    const getAllMessagesByPostId = async () => {
+    const getAllMessages = async () => {
         const responce = await API.get(`/messages/${id}`);       
         setPosts(responce.data);
         setLoadPosts(true);
@@ -72,6 +72,8 @@ function Task(props) {
             const messagesList = posts.filter(item => item._id !== deleteId);
             setPosts(messagesList);
         });
+        
+        setPopupDeleteToggle(false);
     };
 
     const messagesReverse = () => {
@@ -98,10 +100,6 @@ function Task(props) {
                 })
             )
         }
-    }
-
-    const toggleActiveBtn = () => {
-        return isEmpty(post.author) || isEmpty(post.message);
     }
 
     return (
@@ -153,7 +151,7 @@ function Task(props) {
                             </div>
 
                             <div className="text--center">
-                                <button className={`form-create__button waves-effect waves-light btn ${toggleActiveBtn() ? "disabled" : ""}`}>
+                                <button className={`form-create__button waves-effect waves-light btn`}>
                                     {translate(`${allTextLang}_task_message_btn`)}
                                 </button>
                             </div>
